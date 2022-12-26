@@ -1,11 +1,12 @@
 //类T至少应当支持:< > = 赋值构造 （<<, 如果你需要进行输出调试）
 //linkedList类基于文件实现了char[] -> T的键值对存储，目前的对外接口
-//void find(char index_[])
+//std::pair<bool, T> find(char index_[]) ,仅支持同一char[]对应一个T
 //void insert(char index_[], T value_)
 //void del(char index_[], T value_)
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <vector>
 
 const int BLOCK_SIZE = 300;
 const int maxSize = 300;
@@ -329,7 +330,7 @@ public:
         file_end = f_end;
     }
 
-    void find(char index_[])
+    std::pair<bool, T> find(char index_[])
     {
         //There are no values to maintain
         int cur_pos;
@@ -339,6 +340,7 @@ public:
         remainder cur_rem;
         BlockNode<T> cur_node;
         bool flag = false;
+        T res;
         while(cur_pos != -1)//not out of the linkedList yet
         {
             file.seekg(cur_pos);
@@ -352,14 +354,15 @@ public:
                     if (strcmp(cur_node.array[i].index, index_) == 0)
                     {
                         flag = true;
-                        std::cout<<cur_node.array[i].value<<" ";
+                        res = cur_node.array[i].value;
+                        break;
                     }
                 }
             }
+            if (flag) break;
             cur_pos = cur_rem.next;
         }
-        if (flag) std::cout<<'\n';
-        if (!flag) std::cout<<"null\n";
+        return std::make_pair(flag, res);
     }
 
     void insert(char index_[], T value_)
