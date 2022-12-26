@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "Bookstore"
   "Bookstore.pdb"
   "CMakeFiles/Bookstore.dir/main.cpp.o"
+  "CMakeFiles/Bookstore.dir/src/error.cpp.o"
   "CMakeFiles/Bookstore.dir/src/linkedList.cpp.o"
 )
 

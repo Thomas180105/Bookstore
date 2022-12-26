@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/linkedList.cpp
+iostream
+-
+fstream
+-
+cstring
+-
+vector
+-
+

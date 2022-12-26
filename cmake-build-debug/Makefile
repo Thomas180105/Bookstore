@@ -150,6 +150,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/error.o: src/error.cpp.o
+
+.PHONY : src/error.o
+
+# target to build an object file
+src/error.cpp.o:
+	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/src/error.cpp.o
+.PHONY : src/error.cpp.o
+
+src/error.i: src/error.cpp.i
+
+.PHONY : src/error.i
+
+# target to preprocess a source file
+src/error.cpp.i:
+	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/src/error.cpp.i
+.PHONY : src/error.cpp.i
+
+src/error.s: src/error.cpp.s
+
+.PHONY : src/error.s
+
+# target to generate assembly for a file
+src/error.cpp.s:
+	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/src/error.cpp.s
+.PHONY : src/error.cpp.s
+
 src/linkedList.o: src/linkedList.cpp.o
 
 .PHONY : src/linkedList.o
@@ -189,6 +216,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/error.o"
+	@echo "... src/error.i"
+	@echo "... src/error.s"
 	@echo "... src/linkedList.o"
 	@echo "... src/linkedList.i"
 	@echo "... src/linkedList.s"

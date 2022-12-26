@@ -85,6 +85,9 @@
 		<Unit filename="/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/main.cpp">
 			<Option target="Bookstore"/>
 		</Unit>
+		<Unit filename="/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/error.cpp">
+			<Option target="Bookstore"/>
+		</Unit>
 		<Unit filename="/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/linkedList.cpp">
 			<Option target="Bookstore"/>
 		</Unit>
