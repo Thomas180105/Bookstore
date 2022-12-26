@@ -3,7 +3,8 @@
 //std::pair<bool, std::vector<T>> find(char index_[]) ,支持同一char[]对应多个T
 //void insert(char index_[], T value_)
 //void del(char index_[], T value_)
-//std::vector<T> FindAll()
+//std::vector<T> findAll()
+//void modify(char index_[], T his_value, T new_value) 使用条件：保证当前模式是one key - one value
 
 #include <iostream>
 #include <fstream>
@@ -528,7 +529,7 @@ public:
         }
     }
 
-    std::vector<T> FindAll()
+    std::vector<T> findAll()
     {
         int cur_pos;
         file.seekg(0);
@@ -550,5 +551,11 @@ public:
             cur_pos = cur_rem.next;
         }
         return res;
+    }
+
+    void modify(char index_[], T his_value, T new_value)
+    {
+        del(index_, his_value);
+        insert(index_, new_value);
     }
 };
