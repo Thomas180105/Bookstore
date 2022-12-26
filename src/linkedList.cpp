@@ -13,10 +13,12 @@ const int BLOCK_SIZE = 300;
 const int maxSize = 300;
 const int minSize = 120;
 
+template<class T>
 struct map_pair{
     char index[65];
-    int value;
-    map_pair(char index_[] = "", int value_ = 0) : value(value_)
+    T value;
+    map_pair() : index("") {}
+    map_pair(const char index_[], const T value_) : value(value_)
     {
         strcpy(index, index_);
     }
@@ -52,16 +54,17 @@ struct remainder{
     }
 };
 const int size1 = sizeof (remainder);
+template<class T>
 struct BlockNode{
     int size;//The number of elements stored in the array currently
-    map_pair array[BLOCK_SIZE];
+    map_pair<T> array[BLOCK_SIZE];
 
     BlockNode() : size(0)
     {
         for (int i = 0; i < BLOCK_SIZE; ++i)
         {
             strcpy(array[i].index, "");
-            array[i].value = 0;
+            array[i].value = T();
         }
     }
 
@@ -73,9 +76,10 @@ struct BlockNode{
         return *this;
     }
 };
-const int size2 = sizeof (BlockNode);
-const int total_size = size1 + size2;
+//const int size2 = sizeof (BlockNode<T>);
+//const int total_size = size1 + size2;
 
+template<class T>
 class linkedList {
 public:
     int head;//the starting pos of the first remainder in the file
@@ -88,11 +92,11 @@ private:
     void Split(int pos)//split the node located at pos
     {
         remainder fa_rem, son_rem, next_rem;
-        BlockNode fa_node, son_node;
+        BlockNode<T> fa_node, son_node;
 
         file.seekg(pos);
         file.read(reinterpret_cast<char *> (&fa_rem), size1);
-        file.read(reinterpret_cast<char *> (&fa_node), size2);
+        file.read(reinterpret_cast<char *> (&fa_node), sizeof (BlockNode<T>));
 
         int next_pos = fa_rem.next;
 
@@ -112,10 +116,10 @@ private:
 
         file.seekp(pos);
         file.write(reinterpret_cast<char *> (&fa_rem), size1);
-        file.write(reinterpret_cast<char *> (&fa_node), size2);
+        file.write(reinterpret_cast<char *> (&fa_node), sizeof (BlockNode<T>));
         file.seekp(file_end);
         file.write(reinterpret_cast<char *> (&son_rem), size1);
-        file.write(reinterpret_cast<char *> (&son_node), size2);
+        file.write(reinterpret_cast<char *> (&son_node), sizeof (BlockNode<T>));
         if (next_pos != -1)
         {
             file.seekp(next_pos);
@@ -130,7 +134,7 @@ private:
             file.write(reinterpret_cast<char *> (&tail), sizeof(int));
         }
 
-        file_end += total_size;
+        file_end += (size1 + sizeof (BlockNode<T>));
         file.seekp(2 * sizeof(int));
         file.write(reinterpret_cast<char *> (&file_end), sizeof (int));
 
@@ -139,13 +143,13 @@ private:
     void borrow(int type, int dest_pos, int src_pos)//dest_pos borrow from src_pos, the type 1 is borrow from prev, meanwhile type 2 is borrow from next
     {
         remainder dest_rem, src_rem;
-        BlockNode dest_node, src_node;
+        BlockNode<T> dest_node, src_node;
         file.seekg(dest_pos);
         file.read(reinterpret_cast<char *> (&dest_rem), size1);
-        file.read(reinterpret_cast<char *> (&dest_node), size2);
+        file.read(reinterpret_cast<char *> (&dest_node), sizeof (BlockNode<T>));
         file.seekg(src_pos);
         file.read(reinterpret_cast<char *> (&src_rem), size1);
-        file.read(reinterpret_cast<char *> (&src_node), size2);
+        file.read(reinterpret_cast<char *> (&src_node), sizeof (BlockNode<T>));
 
         if (type == 1)
         {
@@ -171,22 +175,22 @@ private:
 
         file.seekp(dest_pos);
         file.write(reinterpret_cast<char *> (&dest_rem), size1);
-        file.write(reinterpret_cast<char *> (&dest_node), size2);
+        file.write(reinterpret_cast<char *> (&dest_node), sizeof (BlockNode<T>));
         file.seekp(src_pos);
         file.write(reinterpret_cast<char *> (&src_rem), size1);
-        file.write(reinterpret_cast<char *> (&src_node), size2);
+        file.write(reinterpret_cast<char *> (&src_node), sizeof (BlockNode<T>));
     }
 
     void Union_to_prev(int from_pos, int to_pos) //Priority over Union_to_next()
     {
         remainder from_rem, to_rem, next_rem;
-        BlockNode from_node, to_node;
+        BlockNode<T> from_node, to_node;
         file.seekg(from_pos);
         file.read(reinterpret_cast<char *> (&from_rem), size1);
-        file.read(reinterpret_cast<char *> (&from_node), size2);
+        file.read(reinterpret_cast<char *> (&from_node), sizeof (BlockNode<T>));
         file.seekg(to_pos);
         file.read(reinterpret_cast<char *> (&to_rem), size1);
-        file.read(reinterpret_cast<char *> (&to_node), size2);
+        file.read(reinterpret_cast<char *> (&to_node), sizeof (BlockNode<T>));
         int next_pos = from_rem.next;
         if (next_pos != -1)
         {
@@ -211,7 +215,7 @@ private:
 
         file.seekp(to_pos);
         file.write(reinterpret_cast<char *> (&to_rem), size1);
-        file.write(reinterpret_cast<char *> (&to_node), size2);
+        file.write(reinterpret_cast<char *> (&to_node), sizeof (BlockNode<T>));
         if (next_pos != -1)
         {
             file.seekp(next_pos);
@@ -222,13 +226,13 @@ private:
     void Union_to_next(int from_pos, int to_pos)
     {
         remainder from_rem, to_rem, prev_rem;
-        BlockNode from_node, to_node;
+        BlockNode<T> from_node, to_node;
         file.seekg(from_pos);
         file.read(reinterpret_cast<char *> (&from_rem), size1);
-        file.read(reinterpret_cast<char *> (&from_node), size2);
+        file.read(reinterpret_cast<char *> (&from_node), sizeof (BlockNode<T>));
         file.seekg(to_pos);
         file.read(reinterpret_cast<char *> (&to_rem), size1);
-        file.read(reinterpret_cast<char *> (&to_node), size2);
+        file.read(reinterpret_cast<char *> (&to_node), sizeof (BlockNode<T>));
         int prev_pos = from_rem.prev;
         if (prev_pos != -1)
         {
@@ -256,7 +260,7 @@ private:
 
         file.seekp(to_pos);
         file.write(reinterpret_cast<char *> (&to_rem), size1);
-        file.write(reinterpret_cast<char *> (&to_node), size2);
+        file.write(reinterpret_cast<char *> (&to_node), sizeof (BlockNode<T>));
         if (prev_pos != -1)
         {
             file.seekp(prev_pos);
@@ -264,38 +268,38 @@ private:
         }
     }
 
-    void insert_to_start(char index_[], int value_, int pos)//insert to the node located at pos, and insert to the very start of this node
+    void insert_to_start(char index_[], T value_, int pos)//insert to the node located at pos, and insert to the very start of this node
     {
         remainder cur_rem;
-        BlockNode cur_node;
-        map_pair to_insert(index_, value_);
+        BlockNode<T> cur_node;
+        map_pair<T> to_insert(index_, value_);
         file.seekg(pos);
         file.read(reinterpret_cast<char *> (&cur_rem), size1);
-        file.read(reinterpret_cast<char *> (&cur_node), size2);
+        file.read(reinterpret_cast<char *> (&cur_node), sizeof (BlockNode<T>));
         strcpy(cur_rem.minimum, index_);
         for (int i = cur_node.size - 1; i >= 0; --i) cur_node.array[i + 1] = cur_node.array[i];
         cur_node.array[0] = to_insert;
         cur_node.size++;
         file.seekp(pos);
         file.write(reinterpret_cast<char *> (&cur_rem), size1);
-        file.write(reinterpret_cast<char *> (&cur_node), size2);
+        file.write(reinterpret_cast<char *> (&cur_node), sizeof (BlockNode<T>));
         if (cur_node.size == maxSize) Split(pos);
     }
 
-    void insert_to_end(char index_[], int value_, int pos)//insert to the node located at pos, and insert to the very end of this node
+    void insert_to_end(char index_[], T value_, int pos)//insert to the node located at pos, and insert to the very end of this node
     {
         remainder cur_rem;
-        BlockNode cur_node;
-        map_pair to_insert(index_, value_);
+        BlockNode<T> cur_node;
+        map_pair<T> to_insert(index_, value_);
         file.seekg(pos);
         file.read(reinterpret_cast<char *> (&cur_rem), size1);
-        file.read(reinterpret_cast<char *> (&cur_node), size2);
+        file.read(reinterpret_cast<char *> (&cur_node), sizeof (BlockNode<T>));
         strcpy(cur_rem.maximum, index_);
         cur_node.array[cur_node.size] = to_insert;
         cur_node.size++;
         file.seekp(pos);
         file.write(reinterpret_cast<char *> (&cur_rem), size1);
-        file.write(reinterpret_cast<char *> (&cur_node), size2);
+        file.write(reinterpret_cast<char *> (&cur_node), sizeof (BlockNode<T>));
         if (cur_node.size == maxSize) Split(pos);
     }
 
@@ -335,7 +339,7 @@ public:
         file.read(reinterpret_cast<char *> (&cur_pos), sizeof(int));
 
         remainder cur_rem;
-        BlockNode cur_node;
+        BlockNode<T> cur_node;
         bool flag = false;
         while(cur_pos != -1)//not out of the linkedList yet
         {
@@ -344,7 +348,7 @@ public:
             if (strcmp(cur_rem.minimum, index_) <= 0 && strcmp(index_, cur_rem.maximum) <= 0)
             {
                 file.seekg(cur_pos + size1);
-                file.read(reinterpret_cast<char *> (&cur_node), size2);
+                file.read(reinterpret_cast<char *> (&cur_node), sizeof (BlockNode<T>));
                 for (int i = 0; i < cur_node.size; i++)
                 {
                     if (strcmp(cur_node.array[i].index, index_) == 0)
@@ -360,10 +364,10 @@ public:
         if (!flag) std::cout<<"null\n";
     }
 
-    void insert(char index_[], int value_)
+    void insert(char index_[], T value_)
     {
         //needs to be maintained : (head) (tail) BlocKNode.size BlockNode.Array (new_remainder) (new_BlockNode)
-        map_pair to_insert(index_, value_);
+        map_pair<T> to_insert(index_, value_);
         int cur_pos;
         file.seekg(0);
         file.read(reinterpret_cast<char *> (&cur_pos), sizeof(int));
@@ -371,14 +375,14 @@ public:
         {
             head = 3 * sizeof(int);
             tail = 3 * sizeof(int);
-            file_end += total_size;
+            file_end += (size1 + sizeof (BlockNode<T>));
             file.seekp(0);
             file.write(reinterpret_cast<char *> (&head), sizeof(int));
             file.write(reinterpret_cast<char *> (&tail), sizeof(int));
             file.write(reinterpret_cast<char *> (&file_end), sizeof(int));
 
             remainder first_rem;
-            BlockNode first_node;
+            BlockNode<T> first_node;
             strcpy(first_rem.maximum, index_);
             strcpy(first_rem.minimum, index_);
             first_node.size = 1;
@@ -386,12 +390,12 @@ public:
 
             file.seekp(head);
             file.write(reinterpret_cast<char *> (&first_rem), size1);
-            file.write(reinterpret_cast<char *> (&first_node), size2);
+            file.write(reinterpret_cast<char *> (&first_node), sizeof (BlockNode<T>));
 
             return;
         }
         remainder cur_rem;
-        BlockNode cur_node;
+        BlockNode<T> cur_node;
         bool smaller_flag = false, bigger_flag = false;//smaller_flag is whether there occur a map_pair that is smaller than int_insert
 
         while(cur_pos != -1)//not out of the linkedList yet
@@ -417,7 +421,7 @@ public:
             else
             {
                 file.seekg(cur_pos + size1);
-                file.read(reinterpret_cast<char *> (&cur_node), size2);
+                file.read(reinterpret_cast<char *> (&cur_node), sizeof (BlockNode<T>));
                 for (int i = 0; i < cur_node.size; i++)
                 {
                     if (to_insert > cur_node.array[i]) smaller_flag = true;
@@ -432,7 +436,7 @@ public:
                             if (i == 0) strcpy(cur_rem.minimum, index_);
                             file.seekp(cur_pos);
                             file.write(reinterpret_cast<char *> (&cur_rem), size1);
-                            file.write(reinterpret_cast<char *> (&cur_node), size2);
+                            file.write(reinterpret_cast<char *> (&cur_node), sizeof (BlockNode<T>));
                             if (cur_node.size == maxSize)
                             {
                                 Split(cur_pos);
@@ -456,7 +460,7 @@ public:
         }
     }
 
-    void del(char index_[], int value_)
+    void del(char index_[], T value_)
     {
         //TODO: For cases where the deleted element does not exist, the time complexity can be optimized
         int cur_pos;
@@ -464,7 +468,7 @@ public:
         file.read(reinterpret_cast<char *> (&cur_pos), sizeof(int));
 
         remainder cur_rem;
-        BlockNode cur_node;
+        BlockNode<T> cur_node;
         while(cur_pos != -1)//not out of the linkedList yet
         {
             file.seekg(cur_pos);
@@ -472,7 +476,7 @@ public:
             if (strcmp(cur_rem.minimum, index_) <= 0 && strcmp(index_, cur_rem.maximum) <= 0)
             {
                 file.seekg(cur_pos + size1);
-                file.read(reinterpret_cast<char *> (&cur_node), size2);
+                file.read(reinterpret_cast<char *> (&cur_node), sizeof (BlockNode<T>));
                 for (int i = 0; i < cur_node.size; i++)
                 {
                     if (strcmp(cur_node.array[i].index, index_) == 0 && cur_node.array[i].value == value_)
@@ -491,23 +495,23 @@ public:
                         cur_node.size--;
                         file.seekp(cur_pos);
                         file.write(reinterpret_cast<char *> (&cur_rem), size1);
-                        file.write(reinterpret_cast<char *> (&cur_node), size2);
+                        file.write(reinterpret_cast<char *> (&cur_node), sizeof (BlockNode<T>));
                         if (cur_node.size < minSize)
                         {
                             int prev_pos = cur_rem.prev, next_pos = cur_rem.next;
-                            BlockNode prev_node, next_node;
+                            BlockNode<T> prev_node, next_node;
                             bool prev_flag = (prev_pos != -1);
                             bool next_flag = (next_pos != -1);
                             if (prev_flag)
                             {
                                 file.seekg(prev_pos + size1);
-                                file.read(reinterpret_cast<char *> (&prev_node), size2);
+                                file.read(reinterpret_cast<char *> (&prev_node), sizeof (BlockNode<T>));
                                 if (prev_node.size > minSize) {borrow(1, cur_pos, prev_pos); return;}
                             }
                             if (next_flag)
                             {
                                 file.seekg(next_pos + size1);
-                                file.read(reinterpret_cast<char *> (&next_node), size2);
+                                file.read(reinterpret_cast<char *> (&next_node), sizeof (BlockNode<T>));
                                 if (next_node.size > minSize){borrow(2, cur_pos, next_pos); return;}
                             }
                             if (prev_flag && prev_node.size == minSize) {Union_to_prev(cur_pos, prev_pos); return;}
@@ -526,7 +530,7 @@ int main()
     int n;
     scanf("%d", &n);
 
-    linkedList test("book");
+    linkedList<int> test("book");
     char op[10], index[65];
     int value;
 
