@@ -1,10 +1,8 @@
-//解决每次main()都重置文件的问题
-//检查所有函数中array进行移动时的for()是否有没有写对
-//size1需出现在rem,size2需出现在node, sizeof(int)用来读取head和tail
-//检查seekg与seekp
-//seekg(tail)不应该写为seekg(std::ios::end)
-//newNode()没有维护tail的含义”指向链表的最后一个节点“,在newNode里面变成了”指向文件中位置最靠后的外存“含义
-//询问为啥一用std::ios::end就寄的原因
+//类T至少应当支持:< > = 赋值构造 （<<, 如果你需要进行输出调试）
+//linkedList类基于文件实现了char[] -> T的键值对存储，目前的对外接口
+//void find(char index_[])
+//void insert(char index_[], T value_)
+//void del(char index_[], T value_)
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -525,32 +523,3 @@ public:
         }
     }
 };
-int main()
-{
-    int n;
-    scanf("%d", &n);
-
-    linkedList<int> test("book");
-    char op[10], index[65];
-    int value;
-
-    for (int i = 0; i < n; ++i)
-    {
-        std::cin>>op;
-        if (op[0] == 'i')
-        {
-            std::cin>>index>>value;
-            test.insert(index, value);
-        }
-        else if (op[0] == 'd')
-        {
-            std::cin>>index>>value;
-            test.del(index, value);
-        }
-        else if (op[0] == 'f')
-        {
-            std::cin>>index;
-            test.find(index);
-        }
-    }
-}
