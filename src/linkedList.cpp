@@ -3,6 +3,7 @@
 //std::pair<bool, std::vector<T>> find(char index_[]) ,支持同一char[]对应多个T
 //void insert(char index_[], T value_)
 //void del(char index_[], T value_)
+//std::vector<T> FindAll()
 
 #include <iostream>
 #include <fstream>
@@ -525,5 +526,29 @@ public:
             }
             cur_pos = cur_rem.next;
         }
+    }
+
+    std::vector<T> FindAll()
+    {
+        int cur_pos;
+        file.seekg(0);
+        file.read(reinterpret_cast<char *> (&cur_pos), sizeof(int));
+
+        remainder cur_rem;
+        BlockNode<T> cur_node;
+        std::vector<T> res;
+        while(cur_pos != -1)//not out of the linkedList yet
+        {
+            file.seekg(cur_pos);
+            file.read(reinterpret_cast<char *> (&cur_rem), size1);
+            file.seekg(cur_pos + size1);
+            file.read(reinterpret_cast<char *> (&cur_node), sizeof (BlockNode<T>));
+            for (int i = 0; i < cur_node.size; i++)
+            {
+                res.push_back(cur_node.array[i].value);
+            }
+            cur_pos = cur_rem.next;
+        }
+        return res;
     }
 };
