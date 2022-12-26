@@ -13,8 +13,6 @@ const int BLOCK_SIZE = 300;
 const int maxSize = 300;
 const int minSize = 120;
 
-
-std::fstream file;
 struct map_pair{
     char index[65];
     int value;
@@ -83,6 +81,7 @@ public:
     int head;//the starting pos of the first remainder in the file
     int tail;//the starting pos of the last remainder in the file
     int file_end;
+    std::fstream file;
 
 private:
 
@@ -301,8 +300,22 @@ private:
     }
 
 public:
-    linkedList()
+    explicit linkedList(const std::string &name)
     {
+        std::ifstream infile(name);
+        if (!infile)
+        {
+            std::ofstream outfile(name);
+            file.open(name);
+            outfile.close();
+            int file_head = -1, file_tail = -1, f_end = 3 * sizeof(int);
+            file.seekp(0);
+            file.write(reinterpret_cast<char *> (&file_head), sizeof(int));
+            file.write(reinterpret_cast<char *> (&file_tail), sizeof(int));
+            file.write(reinterpret_cast<char *> (&f_end), sizeof(int));
+        }
+        else file.open(name);
+
         int file_head, file_tail, f_end;
         file.seekg(0);
         file.read(reinterpret_cast<char *> (&file_head), sizeof(int));
@@ -508,37 +521,12 @@ public:
         }
     }
 };
-void createFile()
-{
-    std::ofstream outfile("book");
-    file.open("book");
-    outfile.close();
-    int file_head = -1, file_tail = -1, f_end = 3 * sizeof(int);
-    file.seekp(0);
-    file.write(reinterpret_cast<char *> (&file_head), sizeof(int));
-    file.write(reinterpret_cast<char *> (&file_tail), sizeof(int));
-    file.write(reinterpret_cast<char *> (&f_end), sizeof(int));
-}
-bool testFile()
-{
-    std::ifstream infile("book");
-    if (!infile) return false;
-    else return true;
-}
 int main()
 {
     int n;
     scanf("%d", &n);
-    if (!testFile())
-    {
-        createFile();
-    }
-    else
-    {
-        file.open("book");
-    }
-    if (!file) {std::cerr<<"ERROR!!!\n"; return 1;}
-    linkedList test;
+
+    linkedList test("book");
     char op[10], index[65];
     int value;
 
@@ -561,5 +549,4 @@ int main()
             test.find(index);
         }
     }
-    file.close();
 }
