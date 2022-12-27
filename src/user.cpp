@@ -127,35 +127,3 @@ void deleteUser(strScanner &scanner)
     if (login_flag) throw error("Invalid");
     userBlock.del(input_id.c_str(), query_res.second.back());
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

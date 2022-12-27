@@ -9,6 +9,28 @@ std::string strScanner::nextStr()
     while (line[pos] != ' ' && line[pos] != '\0') {++pos;}
     return line.substr(st, pos - st);
 }
+std::string strScanner::nextStr_half()
+{
+    int st = pos;
+    if (line[st] == '\0') return "";
+    while (line[pos] == ' ') {++st, ++pos;}
+    if (line[pos] != '-') return "";
+    ++st, ++pos;
+    while (line[pos] != ' ' && line[pos] != '\0' && line[pos] != '=') {++pos;}
+    if (line[pos] == ' ' || line[pos] == '\0') return "";
+    ++pos;
+    return line.substr(st, (pos - 1) - st);
+}
+std::string strScanner::nextStr_specialJudge()
+{
+    int st = pos;
+    if (line[pos] != '\"') return "";
+    ++st, ++pos;
+    while (line[pos] != '\0' && line[pos] != '\"' && line[pos] != ' ') {++pos;}
+    if (line[pos] != '\"') return "";
+    ++pos;
+    return line.substr(st, (pos - 1) -st);
+}
 bool strScanner::is_end()
 {
     while (line[pos] == ' ') ++pos;
