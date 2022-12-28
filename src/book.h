@@ -49,6 +49,7 @@ public:
     }
     bool operator<(const book &rhs) const {return strcmp(ISBN, rhs.ISBN) < 0;}
     bool operator>(const book &rhs) const {return strcmp(ISBN, rhs.ISBN) > 0;}
+    bool operator==(const book &rhs) const {return strcmp(ISBN, rhs.ISBN) == 0;}
     friend ostream &operator<<(ostream &os, const book &rhs);
 };
 

@@ -171,4 +171,79 @@ void select(strScanner &scanner)
 void modify(strScanner &scanner)
 {
     if (userStack.empty()) throw error("Invalid");
+    if (userStack.top().Privilege < 3) throw error("Invalid");
+    if (scanner.is_end()) throw error("Invalid");
+    book his = bookStack.top();
+    book cur = his;
+    if (!strlen(his.ISBN)) throw error("Invalid");
+    his = bookBlock_ISBN.find(his.ISBN).second.back();
+    bool exist[5];
+    memset(exist, 0, sizeof(exist));
+    while (!scanner.is_end())
+    {
+        std::string op = scanner.nextStr_half();
+        if (op == "ISBN")
+        {
+            if (exist[0]) throw error("Invalid");
+            exist[0] = true;
+            std::string input_ISBN = scanner.nextStr();
+            if (!scanner.check(input_ISBN, 20, 1)) throw error("Invalid");
+            if (strcmp(input_ISBN.c_str(), his.ISBN) == 0) throw error("Invalid");
+            if (bookBlock_ISBN.find(input_ISBN.c_str()).first) throw error("Invalid");
+            strcpy(cur.ISBN, input_ISBN.c_str());
+        }
+        else if (op == "name")
+        {
+            if (exist[1]) throw error("Invalid");
+            exist[1] = true;
+            std::string input_name = scanner.nextStr();
+            if (!scanner.check(input_name, 60, 3)) throw error("Invalid");
+            strcpy(cur.BookName, input_name.c_str());
+        }
+        else if (op == "author")
+        {
+            if (exist[2]) throw error("Invalid");
+            exist[2] = true;
+            std::string input_author = scanner.nextStr();
+            if (!scanner.check(input_author, 60, 3)) throw error("Invalid");
+            strcpy(cur.Author, input_author.c_str());
+        }
+        else if (op == "keyword")
+        {
+            if (exist[3]) throw error("Invalid");
+            exist[3] = true;
+            std::string input_keyword = scanner.nextStr();
+            if (!scanner.check(input_keyword, 60, 3)) throw error("Invalid");
+            //TODO: specialJudge needed here
+            strcpy(cur.Keyword, input_keyword.c_str());
+        }
+        else if (op == "price")
+        {
+            if (exist[4]) throw error("Invalid");
+            exist[4] = true;
+            std::string input_price = scanner.nextStr();
+            if (!scanner.check(input_price, 13, 4)) throw error("Invalid");
+            //TODO: specialJudge needed here
+            //TODO: from str to double
+        }
+        else throw error("Invalid");
+    }
+
+    //维护整个bookStack
+    logout();
+    bookStack.push(cur);
+    std::stack<book> tmp;
+    while (!bookStack.empty())
+    {
+        if (bookStack.top() == his) tmp.push(cur);
+        else tmp.push(bookStack.top());
+        bookStack.pop();
+    }
+    while (!tmp.empty())
+    {
+        bookStack.push(tmp.top());
+        tmp.pop();
+    }
+    //维护数据库
+    modifyBook(his, cur);
 }
