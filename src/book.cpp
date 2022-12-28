@@ -176,7 +176,7 @@ void modify(strScanner &scanner)
     book his = bookStack.top();
     book cur = his;
     if (!strlen(his.ISBN)) throw error("Invalid");
-    his = bookBlock_ISBN.find(his.ISBN).second.back();
+//    his = bookBlock_ISBN.find(his.ISBN).second.back(); no need to do so
     bool exist[5];
     memset(exist, 0, sizeof(exist));
     while (!scanner.is_end())
@@ -246,5 +246,25 @@ void modify(strScanner &scanner)
         tmp.pop();
     }
     //维护数据库
+    modifyBook(his, cur);
+}
+void import(strScanner &scanner)
+{
+    if (userStack.empty()) throw error("Invalid");
+    if (userStack.top().Privilege < 3) throw error("Invalid");
+    book his = bookStack.top();
+    book cur = his;
+    if (!strlen(his.ISBN)) throw error("Invalid");
+    std::string input_quantity = scanner.nextStr();
+    if (!scanner.check(input_quantity, 10, 2)) throw error("Invalid");
+    auto digit_quantity = scanner.strToInt_quantityJudge(input_quantity);
+    if (digit_quantity == -1) throw error("Invalid");
+    std::string input_cost = scanner.nextStr();
+    if (!scanner.is_end()) throw error("Invalid");
+    if (!scanner.check(input_cost, 13, 4)) throw error("Invalid");
+    double digit_cost = scanner.strToDouble_doubleJudge(input_cost);
+    if (digit_cost <= 0) throw error("Invalid");
+
+    cur.Book_cnt += digit_quantity;
     modifyBook(his, cur);
 }
