@@ -57,7 +57,7 @@ static linkedList<book> bookBlock_ISBN("Book_ISBN_storage");
 static linkedList<book> bookBlock_BookName("Book_BookName_storage");
 static linkedList<book> bookBlock_Author("Book_Author_storage");
 static linkedList<book> bookBlock_Keyword("Book_Keyword_storage");
-std::stack<book> bookStack;
+static std::stack<book> bookStack;
 void addBook(const book &obj);
 void delBook(const book &obj);
 void bookIn();

@@ -3,6 +3,7 @@
 #include "src/error.cpp"
 #include "src/book.h"
 #include "src/user.h"
+#include "src/linkedList.h"
 /*
 # 基础指令
 quit
