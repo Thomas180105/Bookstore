@@ -83,20 +83,7 @@ double strScanner::strToDouble_doubleJudge(const std::string &obj)
     }
     if (obj[obj.size() - 3]) return -1;
 
-    //开始转化
-    bool begin_flag = false;
-    double base = 1, res = 0;
-    for (const auto &ch : obj)
-    {
-        if (ch == '.') {begin_flag = true; continue;}
-        if (!begin_flag) res = res * 10 + ch - '0';
-        else
-        {
-            base /= 10;
-            res += base * (ch - '0');
-        }
-    }
-    return res;
+    return stod(obj);
 }
 bool strScanner::is_end()
 {
