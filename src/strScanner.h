@@ -11,6 +11,8 @@ private:
 public:
     strScanner() {pos = 0;}
 
+    explicit strScanner(const std::string &s) {line = s, pos = 0;}
+
     void init(const std::string &s) {line = s, pos = 0;}
 
     std::string nextStr();

@@ -30,7 +30,7 @@ void su(strScanner &scanner)
     }
     userStack.push(tmp);
 }
-void logout()
+void user_logout()
 {
     if (userStack.empty()) throw error("Invalid");
     if (userStack.top().Privilege == 0) throw error("Invalid");

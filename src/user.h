@@ -41,12 +41,12 @@ public:
     bool operator<(const account &rhs) const {return strcmp(UserID, rhs.UserID) < 0;}
     bool operator>(const account &rhs) const {return strcmp(UserID, rhs.UserID) > 0;}
 };
-linkedList<account> userBlock("User_storage");
+static linkedList<account> userBlock("User_storage");
 std::stack<account> userStack;
 
 void init();
 void su(strScanner &scanner);
-void logout();
+void user_logout();
 void registerUser(strScanner &scanner);
 void passwd(strScanner &scanner);
 void useradd(strScanner &scanner);

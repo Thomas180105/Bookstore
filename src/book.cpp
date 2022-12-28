@@ -156,7 +156,7 @@ void select(strScanner &scanner)
     auto query_res = bookBlock_ISBN.find(input_ISBN.c_str());
     if (query_res.first)
     {
-        logout();
+        bookOut();
         bookStack.push(query_res.second.back());
     }
     else
@@ -164,7 +164,7 @@ void select(strScanner &scanner)
         book tmp;
         strcpy(tmp.ISBN, input_ISBN.c_str());
         addBook(tmp);
-        logout();
+        bookOut();
         bookStack.push(tmp);
     }
 }
@@ -231,7 +231,7 @@ void modify(strScanner &scanner)
     }
 
     //维护整个bookStack
-    logout();
+    bookOut();
     bookStack.push(cur);
     std::stack<book> tmp;
     while (!bookStack.empty())
@@ -253,7 +253,7 @@ void import(strScanner &scanner)
     if (userStack.empty()) throw error("Invalid");
     if (userStack.top().Privilege < 3) throw error("Invalid");
     book cur = bookStack.top();
-    if (!strlen(his.ISBN)) throw error("Invalid");
+    if (!strlen(cur.ISBN)) throw error("Invalid");
     std::string input_quantity = scanner.nextStr();
     if (!scanner.check(input_quantity, 10, 2)) throw error("Invalid");
     auto digit_quantity = scanner.strToInt_quantityJudge(input_quantity);

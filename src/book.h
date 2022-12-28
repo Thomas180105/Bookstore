@@ -53,10 +53,10 @@ public:
     friend ostream &operator<<(ostream &os, const book &rhs);
 };
 
-linkedList<book> bookBlock_ISBN("Book_ISBN_storage");
-linkedList<book> bookBlock_BookName("Book_BookName_storage");
-linkedList<book> bookBlock_Author("Book_Author_storage");
-linkedList<book> bookBlock_Keyword("Book_Keyword_storage");
+static linkedList<book> bookBlock_ISBN("Book_ISBN_storage");
+static linkedList<book> bookBlock_BookName("Book_BookName_storage");
+static linkedList<book> bookBlock_Author("Book_Author_storage");
+static linkedList<book> bookBlock_Keyword("Book_Keyword_storage");
 std::stack<book> bookStack;
 void addBook(const book &obj);
 void delBook(const book &obj);
