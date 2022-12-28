@@ -252,8 +252,7 @@ void import(strScanner &scanner)
 {
     if (userStack.empty()) throw error("Invalid");
     if (userStack.top().Privilege < 3) throw error("Invalid");
-    book his = bookStack.top();
-    book cur = his;
+    book cur = bookStack.top();
     if (!strlen(his.ISBN)) throw error("Invalid");
     std::string input_quantity = scanner.nextStr();
     if (!scanner.check(input_quantity, 10, 2)) throw error("Invalid");
@@ -266,5 +265,5 @@ void import(strScanner &scanner)
     if (digit_cost <= 0) throw error("Invalid");
 
     cur.Book_cnt += digit_quantity;
-    modifyBook(his, cur);
+    modifyBook(cur, cur);
 }
