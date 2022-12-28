@@ -214,7 +214,7 @@ void modify(strScanner &scanner)
             exist[3] = true;
             std::string input_keyword = scanner.nextStr();
             if (!scanner.check(input_keyword, 60, 3)) throw error("Invalid");
-            //TODO: specialJudge needed here
+            if (!scanner.keyword_specialJudge(input_keyword)) throw error("Invalid");
             strcpy(cur.Keyword, input_keyword.c_str());
         }
         else if (op == "price")
@@ -223,8 +223,9 @@ void modify(strScanner &scanner)
             exist[4] = true;
             std::string input_price = scanner.nextStr();
             if (!scanner.check(input_price, 13, 4)) throw error("Invalid");
-            //TODO: specialJudge needed here
-            //TODO: from str to double
+            double res = scanner.strToDouble_doubleJudge(input_price);
+            if (res == -1) throw error("Invalid");
+            cur.Price = res;
         }
         else throw error("Invalid");
     }

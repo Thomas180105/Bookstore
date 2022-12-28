@@ -31,6 +31,27 @@ std::string strScanner::nextStr_specialJudge()
     ++pos;
     return line.substr(st, (pos - 1) -st);
 }
+bool strScanner::keyword_specialJudge(const std::string &obj)
+{
+    //必须互不相同,关键词不可以为空
+    std::string element[61];
+    int cnt = 0;
+    for (const auto &ch : obj)
+    {
+        if (ch == '|')
+        {
+            if (element[cnt].empty()) return false;
+            ++cnt;
+        }
+        else element[cnt] += ch;
+    }
+    for (int i = 0; i <= cnt; ++i)
+    {
+        for (int j = i + 1; j <= cnt; ++j)
+            if (element[i] == element[j]) return false;
+    }
+    return true;
+}
 int strScanner::strToInt_quantityJudge(const std::string &obj)
 {
     int res = 0;
@@ -43,6 +64,38 @@ int strScanner::strToInt_quantityJudge(const std::string &obj)
         res = res * 10 + ch - '0';
     }
     if (res <= 0) return -1;
+    return res;
+}
+//obj保证为仅由数字和'.'组成（相当于顺带限制了不可以为负数），否则在check(mode为4)时就已经抛出异常了，根本不会调用此函数
+double strScanner::strToDouble_doubleJudge(const std::string &obj)
+{
+    if (obj.empty()) return -1;
+    if (obj.size() > 13) return -1;
+    //"本系统中浮点数输入输出精度固定为小数点后两位",所以'.'的出现次数必为1且位置固定
+    bool dotFlag = false;
+    for (const auto &ch : obj)
+    {
+        if (ch == '.')
+        {
+            if (dotFlag) return -1;
+            else dotFlag = true;
+        }
+    }
+    if (obj[obj.size() - 3]) return -1;
+
+    //开始转化
+    bool begin_flag = false;
+    double base = 1, res = 0;
+    for (const auto &ch : obj)
+    {
+        if (ch == '.') {begin_flag = true; continue;}
+        if (!begin_flag) res = res * 10 + ch - '0';
+        else
+        {
+            base /= 10;
+            res += base * (ch - '0');
+        }
+    }
     return res;
 }
 bool strScanner::is_end()
