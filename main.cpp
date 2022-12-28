@@ -28,35 +28,13 @@ import [Quantity] [TotalCost]
 show finance ([Count])?
 log*/
 bool exitFlag = false;
-void solve(std::string input)
-{
-    strScanner scanner(input);
-    std::string op = scanner.nextStr();
-    if (op.empty()) return;
-    if (op == "quit" || op == "exit") exitFlag = true;
-    else if (op == "su") {su(scanner); bookIn();}
-    else if (op == "logout") {user_logout(); bookOut();}
-    else if (op == "register") registerUser(scanner);
-    else if (op == "passwd") passwd(scanner);
-    else if (op == "useradd") useradd(scanner);
-    else if (op == "delete") deleteUser(scanner);
-    else if (op == "show")
-    {
-        //TODO: 完成日志系统
-        show(scanner);
-    }
-    else if (op == "buy") buy(scanner);
-    else if (op == "select") select(scanner);
-    else if (op == "modify") modify(scanner);
-    else if (op == "import") import(scanner);
-    else throw error("Invalid");
-}
 int main()
 {
     std::string working;
     while (!exitFlag && getline(std::cin, working))
     {
         try{
+            std::cout<<working<<'\n';
             strScanner scanner(working);
             std::string op = scanner.nextStr();
             if (op.empty()) continue;

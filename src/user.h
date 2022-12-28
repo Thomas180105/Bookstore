@@ -40,9 +40,10 @@ public:
     }
     bool operator<(const account &rhs) const {return strcmp(UserID, rhs.UserID) < 0;}
     bool operator>(const account &rhs) const {return strcmp(UserID, rhs.UserID) > 0;}
+    bool operator==(const account &rhs) const {return strcmp(UserID, rhs.UserID) == 0;}
 };
 static linkedList<account> userBlock("User_storage");
-std::stack<account> userStack;
+static std::stack<account> userStack;
 
 void init();
 void su(strScanner &scanner);
