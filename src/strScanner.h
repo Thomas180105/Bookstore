@@ -17,6 +17,7 @@ public:
     std::string nextStr_half();
     //处理"str"的情况
     std::string nextStr_specialJudge();
+    int strToInt_quantityJudge(const std::string &obj);
     bool is_end();
     //0 : 数字，字母，下划线
     //1 : 除不可见字符以外 ASCII 字符(33 - 126)

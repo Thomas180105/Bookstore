@@ -31,6 +31,20 @@ std::string strScanner::nextStr_specialJudge()
     ++pos;
     return line.substr(st, (pos - 1) -st);
 }
+int strScanner::strToInt_quantityJudge(const std::string &obj)
+{
+    int res = 0;
+    if (obj.empty()) return -1;
+    if (obj.size() > 10) return -1;
+    for (auto ch : obj)
+    {
+        //如果是负数，此处会被排除
+        if (!(ch >= '0' && ch <= '9')) return -1;
+        res = res * 10 + ch - '0';
+    }
+    if (res <= 0) return -1;
+    return res;
+}
 bool strScanner::is_end()
 {
     while (line[pos] == ' ') ++pos;
