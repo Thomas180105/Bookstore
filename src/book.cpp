@@ -48,9 +48,9 @@ void modifyBook(const book &his_book, const book &new_book)
     delBook(his_book);
     addBook(new_book);
 }
-void bookIn(const book &cur)
+void bookIn()
 {
-    bookStack.push(cur);
+    bookStack.push(book());
 }
 void bookOut()
 {
@@ -145,4 +145,30 @@ void buy(strScanner &scanner)
     cur.Book_cnt -= digit_quantity;
     modifyBook(cur, cur);
     std::cout<<std::fixed<<std::setprecision(2)<<cur.Price * digit_quantity<<'\n';
+}
+void select(strScanner &scanner)
+{
+    if (userStack.empty()) throw error("Invalid");
+    if (userStack.top().Privilege < 3) throw error("Invalid");
+    std::string input_ISBN = scanner.nextStr();
+    if (!scanner.is_end()) throw error("Invalid");
+    if (!scanner.check(input_ISBN, 20, 1)) throw error("Invalid");
+    auto query_res = bookBlock_ISBN.find(input_ISBN.c_str());
+    if (query_res.first)
+    {
+        logout();
+        bookStack.push(query_res.second.back());
+    }
+    else
+    {
+        book tmp;
+        strcpy(tmp.ISBN, input_ISBN.c_str());
+        addBook(tmp);
+        logout();
+        bookStack.push(tmp);
+    }
+}
+void modify(strScanner &scanner)
+{
+    if (userStack.empty()) throw error("Invalid");
 }
