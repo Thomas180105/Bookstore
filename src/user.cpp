@@ -29,6 +29,8 @@ void su(strScanner &scanner)
 //        if (!scanner.check(input_passwd, 30, 0)) throw error("Invalid");
     }
     userStack.push(tmp);
+    std::cout<<"userStack.empty() is "<<userStack.empty()<<'\n';
+    std::cout<<"the top is "<<tmp.UserID<<"  "<<tmp.Username<<'\n';
 }
 void user_logout()
 {
@@ -85,8 +87,8 @@ void passwd(strScanner &scanner)
 }
 void useradd(strScanner &scanner)
 {
-    if (userStack.empty()) throw error("Invalid");
-    if (userStack.top().Privilege < 3) throw error("Invalid");
+    if (userStack.empty()) throw error("Invalid_useradd_1");
+    if (userStack.top().Privilege < 3) throw error("Invalid_useradd_2");
     std::string input_id = scanner.nextStr();
     if (!scanner.check(input_id, 30, 0)) throw error("Invalid");
     auto query_res = userBlock.find(input_id.c_str());

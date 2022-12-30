@@ -148,11 +148,15 @@ void buy(strScanner &scanner)
 }
 void select(strScanner &scanner)
 {
-    if (userStack.empty()) throw error("Invalid");
-    if (userStack.top().Privilege < 3) throw error("Invalid");
+    if (bookStack.empty())
+    {
+        std::cout<<"bookStack.empty() is "<<bookStack.empty()<<'\n';
+        throw error("Invalid1");
+    }
+    if (userStack.top().Privilege < 3) throw error("Invalid2");
     std::string input_ISBN = scanner.nextStr();
-    if (!scanner.is_end()) throw error("Invalid");
-    if (!scanner.check(input_ISBN, 20, 1)) throw error("Invalid");
+    if (!scanner.is_end()) throw error("Invalid3");
+    if (!scanner.check(input_ISBN, 20, 1)) throw error("Invalid4");
     auto query_res = bookBlock_ISBN.find(input_ISBN.c_str());
     if (query_res.first)
     {

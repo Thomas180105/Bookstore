@@ -31,6 +31,7 @@ bool exitFlag = false;
 int main()
 {
     std::string working;
+    init();
     while (!exitFlag && getline(std::cin, working))
     {
         try{
@@ -62,3 +63,4 @@ int main()
     }
     return 0;
 }
+//rm Book_Author_storage Book_ISBN_storage Book_BookName_storage Book_Keyword_storage User_storage
