@@ -17,6 +17,7 @@ public:
 
     std::string nextStr();
     std::string nextStr_half();
+    std::string nextStr_withoutQuotes();
     //处理"str"的情况
     std::string nextStr_specialJudge();
     bool keyword_specialJudge(const std::string &obj);

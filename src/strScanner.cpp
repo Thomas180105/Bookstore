@@ -21,6 +21,20 @@ std::string strScanner::nextStr_half()
     ++pos;
     return line.substr(st, (pos - 1) - st);
 }
+std::string strScanner::nextStr_withoutQuotes()
+{
+    if (line[pos] != '\"') return "";
+    pos++;
+    int st = pos;
+    while (line[pos] != '\"')
+    {
+        if (line[pos] == ' ' || line[pos] == '\0') return "";
+        pos++;
+    }
+    pos++;
+    if (!(line[pos] == '\0' || line[pos] == ' ')) return "";
+    return line.substr(st, (pos - 1) - st);
+}
 std::string strScanner::nextStr_specialJudge()
 {
     int st = pos;
@@ -71,7 +85,9 @@ double strScanner::strToDouble_doubleJudge(const std::string &obj)
 {
     if (obj.empty()) return -1;
     if (obj.size() > 13) return -1;
-    //"本系统中浮点数输入输出精度固定为小数点后两位",所以'.'的出现次数必为1且位置固定
+    //"本系统中浮点数输入输出精度固定为小数点后两位"
+    //样例中出现了49.8    50这种情形。且标答未Invalid
+    //综上:'.'至多出现一次， 且仅能出现在倒数第二个、倒数第三个这两种位置中的一种
     bool dotFlag = false;
     for (const auto &ch : obj)
     {
@@ -81,7 +97,10 @@ double strScanner::strToDouble_doubleJudge(const std::string &obj)
             else dotFlag = true;
         }
     }
-    if (obj[obj.size() - 3]) return -1;
+    if (dotFlag)
+    {
+        if (obj[obj.size() - 3] != '.' && obj[obj.size() - 2] != '.') return -1;
+    }
 
     return stod(obj);
 }

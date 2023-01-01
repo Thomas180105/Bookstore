@@ -1,4 +1,12 @@
 #include "user.h"
+int getTopUser()
+{
+    return userStack.top().Privilege;
+}
+bool isUserEmpty()
+{
+    return userStack.empty();
+}
 void init()
 {
     char tmpId[31] = "root";
@@ -29,8 +37,11 @@ void su(strScanner &scanner)
 //        if (!scanner.check(input_passwd, 30, 0)) throw error("Invalid");
     }
     userStack.push(tmp);
+    /*std::cout<<"after su():\n";
     std::cout<<"userStack.empty() is "<<userStack.empty()<<'\n';
-    std::cout<<"the top is "<<tmp.UserID<<"  "<<tmp.Username<<'\n';
+    std::cout<<"userStack_empty() is "<<isUserEmpty()<<'\n';
+    std::cout<<"the top Privilege is "<<userStack.top().Privilege<<'\n';
+    std::cout<<"the get_userTop() is "<<getTopUser()<<'\n';*/
 }
 void user_logout()
 {

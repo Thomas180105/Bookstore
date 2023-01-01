@@ -44,7 +44,8 @@ public:
 };
 static linkedList<account> userBlock("User_storage");
 static std::stack<account> userStack;
-
+int getTopUser();
+bool isUserEmpty();
 void init();
 void su(strScanner &scanner);
 void user_logout();

@@ -59,8 +59,8 @@ void bookOut()
 }
 void show(strScanner &scanner)
 {
-    if (userStack.empty()) throw error("Invalid");
-    if (userStack.top().Privilege < 1) throw error("Invalid");
+    if (isUserEmpty()) throw error("Invalid");
+    if (getTopUser() < 1) throw error("Invalid");
     bool notFound = true;
 
     if (scanner.is_end())
@@ -129,8 +129,8 @@ void show(strScanner &scanner)
 }
 void buy(strScanner &scanner)
 {
-    if (userStack.empty()) throw error("Invalid");
-    if (userStack.top().Privilege < 1) throw error("Invalid");
+    if (isUserEmpty()) throw error("Invalid");
+    if (getTopUser() < 1) throw error("Invalid");
     std::string input_ISBN = scanner.nextStr();
     if (!scanner.check(input_ISBN, 20, 1)) throw error("Invalid");
     std::string str_quantity = scanner.nextStr();
@@ -148,15 +148,16 @@ void buy(strScanner &scanner)
 }
 void select(strScanner &scanner)
 {
-    if (bookStack.empty())
-    {
-        std::cout<<"bookStack.empty() is "<<bookStack.empty()<<'\n';
-        throw error("Invalid1");
-    }
-    if (userStack.top().Privilege < 3) throw error("Invalid2");
+    /*std::cout<<"before select():\n";
+    std::cout<<"userStack.empty() is "<<userStack.empty()<<'\n';
+    std::cout<<"userStack_empty() is "<<isUserEmpty()<<'\n';
+    std::cout<<"the top Privilege is "<<userStack.top().Privilege<<'\n';
+    std::cout<<"the get_userTop() is "<<getTopUser()<<'\n';*/
+    if (isUserEmpty()) throw error("Invalid");
+    if (getTopUser() < 3) throw error("Invalid");
     std::string input_ISBN = scanner.nextStr();
-    if (!scanner.is_end()) throw error("Invalid3");
-    if (!scanner.check(input_ISBN, 20, 1)) throw error("Invalid4");
+    if (!scanner.is_end()) throw error("Invalid");
+    if (!scanner.check(input_ISBN, 20, 1)) throw error("Invalid");
     auto query_res = bookBlock_ISBN.find(input_ISBN.c_str());
     if (query_res.first)
     {
@@ -174,8 +175,8 @@ void select(strScanner &scanner)
 }
 void modify(strScanner &scanner)
 {
-    if (userStack.empty()) throw error("Invalid");
-    if (userStack.top().Privilege < 3) throw error("Invalid");
+    if (isUserEmpty()) throw error("Invalid");
+    if (getTopUser() < 3) throw error("Invalid");
     if (scanner.is_end()) throw error("Invalid");
     book his = bookStack.top();
     book cur = his;
@@ -200,7 +201,7 @@ void modify(strScanner &scanner)
         {
             if (exist[1]) throw error("Invalid");
             exist[1] = true;
-            std::string input_name = scanner.nextStr();
+            std::string input_name = scanner.nextStr_withoutQuotes();
             if (!scanner.check(input_name, 60, 3)) throw error("Invalid");
             strcpy(cur.BookName, input_name.c_str());
         }
@@ -208,7 +209,7 @@ void modify(strScanner &scanner)
         {
             if (exist[2]) throw error("Invalid");
             exist[2] = true;
-            std::string input_author = scanner.nextStr();
+            std::string input_author = scanner.nextStr_withoutQuotes();
             if (!scanner.check(input_author, 60, 3)) throw error("Invalid");
             strcpy(cur.Author, input_author.c_str());
         }
@@ -216,9 +217,9 @@ void modify(strScanner &scanner)
         {
             if (exist[3]) throw error("Invalid");
             exist[3] = true;
-            std::string input_keyword = scanner.nextStr();
+            std::string input_keyword = scanner.nextStr_withoutQuotes();
             if (!scanner.check(input_keyword, 60, 3)) throw error("Invalid");
-            if (!scanner.keyword_specialJudge(input_keyword)) throw error("Invalid");
+            if (!scanner.keyword_specialJudge(input_keyword)) throw error("Invalid_vc_keyword");
             strcpy(cur.Keyword, input_keyword.c_str());
         }
         else if (op == "price")
@@ -228,7 +229,7 @@ void modify(strScanner &scanner)
             std::string input_price = scanner.nextStr();
             if (!scanner.check(input_price, 13, 4)) throw error("Invalid");
             double res = scanner.strToDouble_doubleJudge(input_price);
-            if (res == -1) throw error("Invalid");
+            if (res == -1) throw error("Invalid_vc_price");
             cur.Price = res;
         }
         else throw error("Invalid");
@@ -254,8 +255,8 @@ void modify(strScanner &scanner)
 }
 void import(strScanner &scanner)
 {
-    if (userStack.empty()) throw error("Invalid");
-    if (userStack.top().Privilege < 3) throw error("Invalid");
+    if (isUserEmpty()) throw error("Invalid");
+    if (getTopUser() < 3) throw error("Invalid");
     book cur = bookStack.top();
     if (!strlen(cur.ISBN)) throw error("Invalid");
     std::string input_quantity = scanner.nextStr();

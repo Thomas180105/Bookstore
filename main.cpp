@@ -35,7 +35,7 @@ int main()
     while (!exitFlag && getline(std::cin, working))
     {
         try{
-            std::cout<<working<<'\n';
+//            std::cout<<working<<'\n';
             strScanner scanner(working);
             std::string op = scanner.nextStr();
             if (op.empty()) continue;
