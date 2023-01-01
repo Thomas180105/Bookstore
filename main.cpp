@@ -49,7 +49,10 @@ int main()
             else if (op == "show")
             {
                 //TODO: 完成日志系统
-                show(scanner);
+                std::string tmp = scanner.nextStr_preview();
+                if (tmp == "finance")
+                    ;
+                else show(scanner);
             }
             else if (op == "buy") buy(scanner);
             else if (op == "select") select(scanner);

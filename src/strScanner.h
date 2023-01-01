@@ -16,6 +16,7 @@ public:
     void init(const std::string &s) {line = s, pos = 0;}
 
     std::string nextStr();
+    std::string nextStr_preview();
     std::string nextStr_half();
     std::string nextStr_withoutQuotes();
     //处理"str"的情况

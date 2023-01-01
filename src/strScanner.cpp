@@ -9,6 +9,17 @@ std::string strScanner::nextStr()
     while (line[pos] != ' ' && line[pos] != '\0') {++pos;}
     return line.substr(st, pos - st);
 }
+std::string strScanner::nextStr_preview()
+{
+    int st = pos;
+    //鲁棒性警告！
+    if (line[st] == '\0') return "";
+    while (line[pos] == ' ') {++st, ++pos;}
+    while (line[pos] != ' ' && line[pos] != '\0') {++pos;}
+    int tmp = pos;
+    pos = st;
+    return line.substr(st, tmp - st);
+}
 std::string strScanner::nextStr_half()
 {
     int st = pos;
