@@ -16,6 +16,7 @@ void addBook(const book &obj)
     std::string cur;
     for (const auto &ch : obj.Keyword)
     {
+        if (ch == '\0') break;
         if (ch == '|')
         {
             bookBlock_Keyword.insert(cur.c_str(), obj);
@@ -33,6 +34,7 @@ void delBook(const book &obj)
     std::string cur;
     for (const auto &ch : obj.Keyword)
     {
+        if (ch == '\0') break;
         if (ch == '|')
         {
             bookBlock_Keyword.del(cur.c_str(), obj);
@@ -40,7 +42,18 @@ void delBook(const book &obj)
         }
         else cur += ch;
     }
-    if (!cur.empty()) bookBlock_Keyword.del(cur.c_str(), obj);
+    if (!cur.empty())
+    {
+        /*std::cout<<"in! the str is : "<<cur<<'\n';
+        std::cout<<"the str.size() is : "<<cur.size()<<'\n';
+        int cnt = 0;
+        for (const auto& ch : cur)
+        {
+            if (ch == ' ' || ch == '\0') cnt++;
+        }
+        std::cout<<"ignore the blank, the str.size() is : "<<cur.size() - cnt<<'\n';*/
+        bookBlock_Keyword.del(cur.c_str(), obj);
+    }
 }
 //如果一本书obj修改前后没有修改ISBN、BookName、Author、keyWord，那么直接调用modifyBook(obj, obj)即可
 //否则需要先将obj修改前的值进行拷贝，然后对于obj修改后调用modifyBook(his_, cur_);
@@ -181,9 +194,9 @@ void modify(strScanner &scanner)
     if (getTopUser() < 3) throw error("Invalid");
     if (scanner.is_end()) throw error("Invalid");
     book his = bookStack.top();
-    book cur = his;
     if (!strlen(his.ISBN)) throw error("Invalid");
-//    his = bookBlock_ISBN.find(his.ISBN).second.back(); no need to do so
+    his = bookBlock_ISBN.find(his.ISBN).second.back();
+    book cur = his;
     bool exist[5];
     memset(exist, 0, sizeof(exist));
     while (!scanner.is_end())
@@ -254,6 +267,8 @@ void modify(strScanner &scanner)
     }
     //维护数据库
     modifyBook(his, cur);
+//    std::cout<<"the his.keyword : "<<his.Keyword<<'\n';
+//    std::cout<<"the cur.keyword : "<<cur.Keyword<<'\n';
 }
 void import(strScanner &scanner)
 {
