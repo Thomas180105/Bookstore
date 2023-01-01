@@ -96,11 +96,53 @@ CMakeFiles/Bookstore.dir/src/error.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Bookstore.dir/src/error.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/error.cpp -o CMakeFiles/Bookstore.dir/src/error.cpp.s
 
+CMakeFiles/Bookstore.dir/src/strScanner.cpp.o: CMakeFiles/Bookstore.dir/flags.make
+CMakeFiles/Bookstore.dir/src/strScanner.cpp.o: ../src/strScanner.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Bookstore.dir/src/strScanner.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Bookstore.dir/src/strScanner.cpp.o -c /mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/strScanner.cpp
+
+CMakeFiles/Bookstore.dir/src/strScanner.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Bookstore.dir/src/strScanner.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/strScanner.cpp > CMakeFiles/Bookstore.dir/src/strScanner.cpp.i
+
+CMakeFiles/Bookstore.dir/src/strScanner.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Bookstore.dir/src/strScanner.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/strScanner.cpp -o CMakeFiles/Bookstore.dir/src/strScanner.cpp.s
+
+CMakeFiles/Bookstore.dir/src/user.cpp.o: CMakeFiles/Bookstore.dir/flags.make
+CMakeFiles/Bookstore.dir/src/user.cpp.o: ../src/user.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Bookstore.dir/src/user.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Bookstore.dir/src/user.cpp.o -c /mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/user.cpp
+
+CMakeFiles/Bookstore.dir/src/user.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Bookstore.dir/src/user.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/user.cpp > CMakeFiles/Bookstore.dir/src/user.cpp.i
+
+CMakeFiles/Bookstore.dir/src/user.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Bookstore.dir/src/user.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/user.cpp -o CMakeFiles/Bookstore.dir/src/user.cpp.s
+
+CMakeFiles/Bookstore.dir/src/book.cpp.o: CMakeFiles/Bookstore.dir/flags.make
+CMakeFiles/Bookstore.dir/src/book.cpp.o: ../src/book.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Bookstore.dir/src/book.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Bookstore.dir/src/book.cpp.o -c /mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/book.cpp
+
+CMakeFiles/Bookstore.dir/src/book.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Bookstore.dir/src/book.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/book.cpp > CMakeFiles/Bookstore.dir/src/book.cpp.i
+
+CMakeFiles/Bookstore.dir/src/book.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Bookstore.dir/src/book.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/book.cpp -o CMakeFiles/Bookstore.dir/src/book.cpp.s
+
 # Object files for target Bookstore
 Bookstore_OBJECTS = \
 "CMakeFiles/Bookstore.dir/main.cpp.o" \
 "CMakeFiles/Bookstore.dir/src/linkedList.cpp.o" \
-"CMakeFiles/Bookstore.dir/src/error.cpp.o"
+"CMakeFiles/Bookstore.dir/src/error.cpp.o" \
+"CMakeFiles/Bookstore.dir/src/strScanner.cpp.o" \
+"CMakeFiles/Bookstore.dir/src/user.cpp.o" \
+"CMakeFiles/Bookstore.dir/src/book.cpp.o"
 
 # External object files for target Bookstore
 Bookstore_EXTERNAL_OBJECTS =
@@ -108,9 +150,12 @@ Bookstore_EXTERNAL_OBJECTS =
 Bookstore: CMakeFiles/Bookstore.dir/main.cpp.o
 Bookstore: CMakeFiles/Bookstore.dir/src/linkedList.cpp.o
 Bookstore: CMakeFiles/Bookstore.dir/src/error.cpp.o
+Bookstore: CMakeFiles/Bookstore.dir/src/strScanner.cpp.o
+Bookstore: CMakeFiles/Bookstore.dir/src/user.cpp.o
+Bookstore: CMakeFiles/Bookstore.dir/src/book.cpp.o
 Bookstore: CMakeFiles/Bookstore.dir/build.make
 Bookstore: CMakeFiles/Bookstore.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable Bookstore"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable Bookstore"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Bookstore.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

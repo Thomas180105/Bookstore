@@ -5,8 +5,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/main.cpp" "/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/cmake-build-debug/CMakeFiles/Bookstore.dir/main.cpp.o"
+  "/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/book.cpp" "/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/cmake-build-debug/CMakeFiles/Bookstore.dir/src/book.cpp.o"
   "/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/error.cpp" "/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/cmake-build-debug/CMakeFiles/Bookstore.dir/src/error.cpp.o"
   "/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/linkedList.cpp" "/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/cmake-build-debug/CMakeFiles/Bookstore.dir/src/linkedList.cpp.o"
+  "/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/strScanner.cpp" "/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/cmake-build-debug/CMakeFiles/Bookstore.dir/src/strScanner.cpp.o"
+  "/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/user.cpp" "/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/cmake-build-debug/CMakeFiles/Bookstore.dir/src/user.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

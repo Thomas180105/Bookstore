@@ -85,10 +85,31 @@
 		<Unit filename="/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/main.cpp">
 			<Option target="Bookstore"/>
 		</Unit>
+		<Unit filename="/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/book.cpp">
+			<Option target="Bookstore"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/book.h">
+			<Option target="Bookstore"/>
+		</Unit>
 		<Unit filename="/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/error.cpp">
 			<Option target="Bookstore"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/linkedList.cpp">
+			<Option target="Bookstore"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/linkedList.h">
+			<Option target="Bookstore"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/strScanner.cpp">
+			<Option target="Bookstore"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/strScanner.h">
+			<Option target="Bookstore"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/user.cpp">
+			<Option target="Bookstore"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/src/user.h">
 			<Option target="Bookstore"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/CMakeLists.txt">

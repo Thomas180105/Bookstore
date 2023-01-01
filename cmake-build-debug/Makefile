@@ -150,6 +150,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/book.o: src/book.cpp.o
+
+.PHONY : src/book.o
+
+# target to build an object file
+src/book.cpp.o:
+	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/src/book.cpp.o
+.PHONY : src/book.cpp.o
+
+src/book.i: src/book.cpp.i
+
+.PHONY : src/book.i
+
+# target to preprocess a source file
+src/book.cpp.i:
+	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/src/book.cpp.i
+.PHONY : src/book.cpp.i
+
+src/book.s: src/book.cpp.s
+
+.PHONY : src/book.s
+
+# target to generate assembly for a file
+src/book.cpp.s:
+	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/src/book.cpp.s
+.PHONY : src/book.cpp.s
+
 src/error.o: src/error.cpp.o
 
 .PHONY : src/error.o
@@ -204,6 +231,60 @@ src/linkedList.cpp.s:
 	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/src/linkedList.cpp.s
 .PHONY : src/linkedList.cpp.s
 
+src/strScanner.o: src/strScanner.cpp.o
+
+.PHONY : src/strScanner.o
+
+# target to build an object file
+src/strScanner.cpp.o:
+	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/src/strScanner.cpp.o
+.PHONY : src/strScanner.cpp.o
+
+src/strScanner.i: src/strScanner.cpp.i
+
+.PHONY : src/strScanner.i
+
+# target to preprocess a source file
+src/strScanner.cpp.i:
+	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/src/strScanner.cpp.i
+.PHONY : src/strScanner.cpp.i
+
+src/strScanner.s: src/strScanner.cpp.s
+
+.PHONY : src/strScanner.s
+
+# target to generate assembly for a file
+src/strScanner.cpp.s:
+	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/src/strScanner.cpp.s
+.PHONY : src/strScanner.cpp.s
+
+src/user.o: src/user.cpp.o
+
+.PHONY : src/user.o
+
+# target to build an object file
+src/user.cpp.o:
+	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/src/user.cpp.o
+.PHONY : src/user.cpp.o
+
+src/user.i: src/user.cpp.i
+
+.PHONY : src/user.i
+
+# target to preprocess a source file
+src/user.cpp.i:
+	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/src/user.cpp.i
+.PHONY : src/user.cpp.i
+
+src/user.s: src/user.cpp.s
+
+.PHONY : src/user.s
+
+# target to generate assembly for a file
+src/user.cpp.s:
+	$(MAKE) -f CMakeFiles/Bookstore.dir/build.make CMakeFiles/Bookstore.dir/src/user.cpp.s
+.PHONY : src/user.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -216,12 +297,21 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/book.o"
+	@echo "... src/book.i"
+	@echo "... src/book.s"
 	@echo "... src/error.o"
 	@echo "... src/error.i"
 	@echo "... src/error.s"
 	@echo "... src/linkedList.o"
 	@echo "... src/linkedList.i"
 	@echo "... src/linkedList.s"
+	@echo "... src/strScanner.o"
+	@echo "... src/strScanner.i"
+	@echo "... src/strScanner.s"
+	@echo "... src/user.o"
+	@echo "... src/user.i"
+	@echo "... src/user.s"
 .PHONY : help
 
 
