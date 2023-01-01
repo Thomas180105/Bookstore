@@ -1,5 +1,6 @@
 #include "book.h"
 #include "user.h"
+#include "diary.h"
 #include <iomanip>
 ostream &operator<<(ostream &os, const book &rhs)
 {
@@ -144,6 +145,7 @@ void buy(strScanner &scanner)
 
     cur.Book_cnt -= digit_quantity;
     modifyBook(cur, cur);
+    addDiary(cur.Price * digit_quantity);
     std::cout<<std::fixed<<std::setprecision(2)<<cur.Price * digit_quantity<<'\n';
 }
 void select(strScanner &scanner)
@@ -219,7 +221,7 @@ void modify(strScanner &scanner)
             exist[3] = true;
             std::string input_keyword = scanner.nextStr_withoutQuotes();
             if (!scanner.check(input_keyword, 60, 3)) throw error("Invalid");
-            if (!scanner.keyword_specialJudge(input_keyword)) throw error("Invalid_vc_keyword");
+            if (!scanner.keyword_specialJudge(input_keyword)) throw error("Invalid");
             strcpy(cur.Keyword, input_keyword.c_str());
         }
         else if (op == "price")
@@ -229,7 +231,7 @@ void modify(strScanner &scanner)
             std::string input_price = scanner.nextStr();
             if (!scanner.check(input_price, 13, 4)) throw error("Invalid");
             double res = scanner.strToDouble_doubleJudge(input_price);
-            if (res == -1) throw error("Invalid_vc_price");
+            if (res == -1) throw error("Invalid");
             cur.Price = res;
         }
         else throw error("Invalid");
@@ -271,4 +273,5 @@ void import(strScanner &scanner)
 
     cur.Book_cnt += digit_quantity;
     modifyBook(cur, cur);
+    addDiary(-digit_cost);
 }

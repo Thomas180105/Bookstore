@@ -98,8 +98,8 @@ void passwd(strScanner &scanner)
 }
 void useradd(strScanner &scanner)
 {
-    if (userStack.empty()) throw error("Invalid_useradd_1");
-    if (userStack.top().Privilege < 3) throw error("Invalid_useradd_2");
+    if (userStack.empty()) throw error("Invalid");
+    if (userStack.top().Privilege < 3) throw error("Invalid");
     std::string input_id = scanner.nextStr();
     if (!scanner.check(input_id, 30, 0)) throw error("Invalid");
     auto query_res = userBlock.find(input_id.c_str());

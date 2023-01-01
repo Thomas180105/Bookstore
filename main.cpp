@@ -3,6 +3,7 @@
 #include "src/error.cpp"
 #include "src/book.h"
 #include "src/user.h"
+#include "src/diary.h"
 #include "src/linkedList.h"
 /*
 # 基础指令
@@ -32,6 +33,7 @@ int main()
 {
     std::string working;
     init();
+    initDiary();
     while (!exitFlag && getline(std::cin, working))
     {
         try{
@@ -48,10 +50,8 @@ int main()
             else if (op == "delete") deleteUser(scanner);
             else if (op == "show")
             {
-                //TODO: 完成日志系统
                 std::string tmp = scanner.nextStr_preview();
-                if (tmp == "finance")
-                    ;
+                if (tmp == "finance") showFinance(scanner);
                 else show(scanner);
             }
             else if (op == "buy") buy(scanner);
@@ -64,6 +64,8 @@ int main()
             std::cout<<obj.toString()<<'\n';
         }
     }
+
+    writeCount();
     return 0;
 }
 //rm Book_Author_storage Book_ISBN_storage Book_BookName_storage Book_Keyword_storage User_storage
