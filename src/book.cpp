@@ -261,6 +261,7 @@ void import(strScanner &scanner)
     if (getTopUser() < 3) throw error("Invalid");
     book cur = bookStack.top();
     if (!strlen(cur.ISBN)) throw error("Invalid");
+    cur = bookBlock_ISBN.find(cur.ISBN).second.back();
     std::string input_quantity = scanner.nextStr();
     if (!scanner.check(input_quantity, 10, 2)) throw error("Invalid");
     auto digit_quantity = scanner.strToInt_quantityJudge(input_quantity);
