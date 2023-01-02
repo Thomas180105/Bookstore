@@ -70,6 +70,7 @@ bool strScanner::keyword_specialJudge(const std::string &obj)
         }
         else element[cnt] += ch;
     }
+    if (element[cnt].empty()) return false;
     for (int i = 0; i <= cnt; ++i)
     {
         for (int j = i + 1; j <= cnt; ++j)
