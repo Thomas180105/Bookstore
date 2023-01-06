@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/Bookstore.dir/main.cpp.o CMakeFiles/Bookstore.dir/src/linkedList.cpp.o CMakeFiles/Bookstore.dir/src/error.cpp.o CMakeFiles/Bookstore.dir/src/strScanner.cpp.o CMakeFiles/Bookstore.dir/src/user.cpp.o CMakeFiles/Bookstore.dir/src/book.cpp.o  -o Bookstore 

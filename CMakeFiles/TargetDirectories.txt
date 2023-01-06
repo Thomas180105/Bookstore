@@ -1,3 +1,0 @@
-/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/CMakeFiles/edit_cache.dir
-/mnt/c/Users/Lenovo/CLionProjects/Bookstore-2022/CMakeFiles/code.dir

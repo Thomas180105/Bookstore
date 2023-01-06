@@ -64,7 +64,6 @@ int main()
             std::cout<<obj.toString()<<'\n';
         }
     }
-
     writeCount();
     return 0;
 }
