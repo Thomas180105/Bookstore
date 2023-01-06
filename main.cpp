@@ -58,6 +58,7 @@ int main()
             else if (op == "select") select(scanner);
             else if (op == "modify") modify(scanner);
             else if (op == "import") import(scanner);
+            else if (op == "log") showFinance(scanner);
             else throw error("Invalid");
         }
         catch (error &obj){
